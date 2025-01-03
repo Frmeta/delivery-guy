@@ -3,7 +3,7 @@ extends Node2D
 
 var game_over_msec = 0
 const save_path := "user://highscore.dat"
-const game_time = 30
+const game_time = 60
 
 func _ready():
 	
