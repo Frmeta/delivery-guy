@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://kcofqkdcoup1"]
+
+[ext_resource type="Script" path="res://Scripts/recipient.gd" id="1_afmkg"]
+[ext_resource type="Texture2D" uid="uid://pw3okh7w314h" path="res://white.tres" id="1_amhs1"]
+[ext_resource type="Texture2D" uid="uid://dy2b4oqjmg8wt" path="res://Sprites/Food.png" id="3_dwsfy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rll7v"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qinl1"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 186.44
+gravity = Vector3(0, 150, 0)
+scale_max = 11.35
+
+[node name="Recipient" type="Area2D" groups=["recipient"]]
+script = ExtResource("1_afmkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.378413, 0.484735, 0.879722, 1)
+scale = Vector2(0.255814, 0.807692)
+texture = ExtResource("1_amhs1")
+
+[node name="Bubble" type="Sprite2D" parent="."]
+position = Vector2(0, -46)
+scale = Vector2(0.432872, 0.408474)
+texture = ExtResource("1_amhs1")
+
+[node name="Desired Package" type="Sprite2D" parent="Bubble"]
+texture_filter = 1
+position = Vector2(0, 2.44812)
+scale = Vector2(2.31015, 2.44813)
+texture = ExtResource("3_dwsfy")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.1183, 2.60642)
+shape = SubResource("RectangleShape2D_rll7v")
+
+[node name="Particle" type="GPUParticles2D" parent="."]
+modulate = Color(0.777278, 0.773344, 3.85046e-07, 1)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_qinl1")
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+draw_order = 0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

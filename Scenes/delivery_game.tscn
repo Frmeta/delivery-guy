@@ -1,0 +1,230 @@
+[gd_scene load_steps=29 format=3 uid="uid://dv2yfjjr21lw5"]
+
+[ext_resource type="Texture2D" uid="uid://pw3okh7w314h" path="res://white.tres" id="1_3y3v4"]
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_dg5sn"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="2_8esac"]
+[ext_resource type="Texture2D" uid="uid://dw6x61smacj2s" path="res://Sprites/Warrior/Individual Sprite/idle/Warrior_Idle_1.png" id="3_g1kxj"]
+[ext_resource type="Texture2D" uid="uid://b7vxtakjjlw8a" path="res://Sprites/Warrior/Individual Sprite/idle/Warrior_Idle_2.png" id="4_vejww"]
+[ext_resource type="Texture2D" uid="uid://cgtkgbnka6ufa" path="res://Sprites/Warrior/Individual Sprite/idle/Warrior_Idle_3.png" id="5_wxwun"]
+[ext_resource type="Texture2D" uid="uid://dv5fuu3o8wmw6" path="res://Sprites/Warrior/Individual Sprite/idle/Warrior_Idle_4.png" id="6_5gh5b"]
+[ext_resource type="Texture2D" uid="uid://dgchfu0o5uwhb" path="res://Sprites/Warrior/Individual Sprite/idle/Warrior_Idle_5.png" id="7_v618f"]
+[ext_resource type="Texture2D" uid="uid://dy4ham43ifcdr" path="res://Sprites/Warrior/Individual Sprite/idle/Warrior_Idle_6.png" id="8_ux7xk"]
+[ext_resource type="Texture2D" uid="uid://do3mno5smc3ja" path="res://Sprites/Warrior/Individual Sprite/Run/Warrior_Run_1.png" id="9_1x0uk"]
+[ext_resource type="Texture2D" uid="uid://c3gjme0lfbxum" path="res://Sprites/Warrior/Individual Sprite/Run/Warrior_Run_2.png" id="10_dnpve"]
+[ext_resource type="Texture2D" uid="uid://dtj8v7qdnhmsw" path="res://Sprites/Warrior/Individual Sprite/Run/Warrior_Run_3.png" id="11_1h3dx"]
+[ext_resource type="Texture2D" uid="uid://bnnmoe5tj4vx0" path="res://Sprites/Warrior/Individual Sprite/Run/Warrior_Run_4.png" id="12_8fcrp"]
+[ext_resource type="Texture2D" uid="uid://d0l25ibf3ffng" path="res://Sprites/Warrior/Individual Sprite/Run/Warrior_Run_5.png" id="13_4wly4"]
+[ext_resource type="Texture2D" uid="uid://p8ny0h4i85ws" path="res://Sprites/Warrior/Individual Sprite/Run/Warrior_Run_6.png" id="14_o8m5a"]
+[ext_resource type="Texture2D" uid="uid://dmdtk0xhqvixg" path="res://Sprites/Warrior/Individual Sprite/Run/Warrior_Run_7.png" id="15_vh2hc"]
+[ext_resource type="Texture2D" uid="uid://cbe0tyn52bl4f" path="res://Sprites/Warrior/Individual Sprite/Run/Warrior_Run_8.png" id="16_dd28x"]
+[ext_resource type="PackedScene" uid="uid://dvjgs71c0a3lx" path="res://Scenes/packages.tscn" id="17_b6jjk"]
+[ext_resource type="Script" path="res://Scripts/Truck.gd" id="18_43miu"]
+[ext_resource type="PackedScene" uid="uid://kcofqkdcoup1" path="res://Scenes/recipient.tscn" id="19_avagl"]
+[ext_resource type="AudioStream" uid="uid://q2qmbdcpjqjq" path="res://audio/pikcup.wav" id="20_6106m"]
+[ext_resource type="AudioStream" uid="uid://d3o348sjqkxvk" path="res://audio/deliver.wav" id="21_b4uq4"]
+[ext_resource type="Script" path="res://Scripts/PauseButton.gd" id="23_pvtgd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8m45l"]
+size = Vector2(768, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trric"]
+size = Vector2(35, 163)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a37bu"]
+size = Vector2(69.5432, 71.2469)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m5vkl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_g1kxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vejww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wxwun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5gh5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_v618f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ux7xk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_1x0uk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_dnpve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1h3dx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8fcrp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4wly4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_o8m5a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_vh2hc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_dd28x")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_06qso"]
+
+[node name="delivery game" type="Node2D"]
+script = ExtResource("1_dg5sn")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(259, 124)
+shape = SubResource("RectangleShape2D_8m45l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Ground"]
+position = Vector2(-106, 27)
+shape = SubResource("RectangleShape2D_trric")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Ground"]
+position = Vector2(626, 33)
+shape = SubResource("RectangleShape2D_trric")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+modulate = Color(0.154312, 0.246328, 0.160517, 1)
+position = Vector2(247, 178)
+scale = Vector2(17.96, 2.16)
+texture = ExtResource("1_3y3v4")
+
+[node name="Truck" type="Area2D" parent="."]
+position = Vector2(18, 96)
+scale = Vector2(0.603941, 0.421071)
+script = ExtResource("18_43miu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Truck"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_a37bu")
+
+[node name="Truck" type="Sprite2D" parent="Truck"]
+modulate = Color(0.638132, 0.58012, 0.16429, 1)
+scale = Vector2(1, 1)
+texture = ExtResource("1_3y3v4")
+
+[node name="Truck2" type="Sprite2D" parent="Truck"]
+modulate = Color(0.370862, 0.249286, 0.317406, 1)
+position = Vector2(-19.8695, -37.9983)
+scale = Vector2(0.112929, 0.314154)
+texture = ExtResource("1_3y3v4")
+
+[node name="Truck3" type="Sprite2D" parent="Truck"]
+modulate = Color(0.355846, 0.179161, 0.556212, 1)
+position = Vector2(-1.65579, -37.9983)
+scale = Vector2(0.208379, 0.241827)
+texture = ExtResource("1_3y3v4")
+
+[node name="Truck4" type="Sprite2D" parent="Truck"]
+modulate = Color(0.811765, 0.270588, 0.196078, 1)
+position = Vector2(18.2137, -35.6234)
+scale = Vector2(0.208379, 0.241827)
+texture = ExtResource("1_3y3v4")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(166, 90)
+script = ExtResource("2_8esac")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(2, -6)
+sprite_frames = SubResource("SpriteFrames_m5vkl")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_06qso")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(1, -4)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
+[node name="item in hand" type="Sprite2D" parent="Player"]
+
+[node name="Packages" parent="Player" instance=ExtResource("17_b6jjk")]
+position = Vector2(0, -27)
+
+[node name="pickup" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("20_6106m")
+
+[node name="deliver" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("21_b4uq4")
+
+[node name="Recipient" parent="." instance=ExtResource("19_avagl")]
+position = Vector2(379, 84)
+
+[node name="Recipient2" parent="." instance=ExtResource("19_avagl")]
+position = Vector2(465, 86)
+
+[node name="Recipient3" parent="." instance=ExtResource("19_avagl")]
+position = Vector2(313, 85)
+
+[node name="Recipient4" parent="." instance=ExtResource("19_avagl")]
+position = Vector2(523, 85)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseButton" type="Button" parent="CanvasLayer"]
+process_mode = 3
+offset_left = 45.0
+offset_top = 20.0
+offset_right = 168.0
+offset_bottom = 83.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 40
+text = " Pause "
+script = ExtResource("23_pvtgd")
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -225.0
+offset_top = 21.0
+offset_right = -34.0
+offset_bottom = 91.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Score: 0"
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -103.0
+offset_top = 10.0
+offset_right = 125.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Timer: 60"
+
+[connection signal="body_entered" from="Truck" to="Truck" method="_on_body_entered"]
+[connection signal="body_exited" from="Truck" to="Truck" method="_on_body_exited"]
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="CanvasLayer/PauseButton" method="_on_pressed"]
